@@ -69,7 +69,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<pre class="chroma" tabindex="0">&lt;img src="/img/1.png" alt="main menu" width="360" height="150" /&gt;</pre>
+<img src="/img/1.png" alt="main" width="360" height="150" />
 </td>
 </tr>
 <tr>
