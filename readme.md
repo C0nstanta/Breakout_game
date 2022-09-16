@@ -69,7 +69,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<img src="/img/1.png" alt="main" width="360" height="150" />
+<img src="/img/2.png" alt="main"  />
 </td>
 </tr>
 <tr>
