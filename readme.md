@@ -249,5 +249,5 @@
 </table>
 
 <div style="width:160px ; height:160px">
-![Main Menu](/img/1.png?raw=true "Main Menu")
+![Main Menu](./img/1.png?raw=true "Main Menu")
 <div>
