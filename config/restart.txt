@@ -1,0 +1,5 @@
+#config string format is:
+#x_coord:y_coord:text
+550:300:Press Q to quite the game
+550:320:Press R to restart the game
+550:350:Lives:

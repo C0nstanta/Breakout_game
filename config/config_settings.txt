@@ -1,0 +1,12 @@
+upper_left_x: 10
+upper_left_y: 10
+window_width: 3
+window_width: 1280
+window_height: 800
+padding_width: 100
+padding_height: 10
+padding_pos_x: 615
+padding_pos_y: 750
+ball_size: 10
+ball_pos_x: 500
+ball_pos_y: 350

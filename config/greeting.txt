@@ -1,0 +1,7 @@
+#config string format is:
+#x_coord:y_coord:text
+550:300:BREAKOUT
+550:350:Press A and D to move left and right
+550:400:Press W and S to move up and down
+550:450:Press E to start
+550:500:Press Q to end

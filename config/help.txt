@@ -1,0 +1,9 @@
+#config string format is:
+#x_coord:y_coord:text
+50:30:Press Q to quite the game
+50:60:Press R to restart the game
+400:30:Press W | S to move paddle up | down
+400:60:Press A | D to move paddle left | right
+400:90:Press P to start the game
+900:30:Score:
+900:60:Lives left:
