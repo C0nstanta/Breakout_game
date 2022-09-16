@@ -67,6 +67,11 @@
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>&nbsp;Выполнено</strong></span></td>
 </tr>
 <tr>
+<td style="width: 469.344px;" colspan="2">
+<pre><code>![alt text](https://github.com/C0nstanta/Breakout_game/blob/master/img/1.png?raw=true)</code></pre>
+</td>
+</tr>
+<tr>
 <td style="width: 469.344px;"><strong>&nbsp;</strong>
 <p class="p2"><strong>Элементы - Новая игра, Выйти из игры (обязательно), прочие элементы меню (могут добавляться по ходу реализации нового функционала)</strong></p>
 <p class="p2"><strong>Управление в игре реализовать способом ввода данных через нажатие клавиш - стрелками или клавишами WASD (W - вверх, S - вниз, A - влево, D -</strong></p>
@@ -113,6 +118,11 @@
 <p class="p2"><strong>квадрата)</strong></p>
 </td>
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>&nbsp;Выполнено</strong></span></td>
+</tr>
+<tr>
+<td style="width: 469.344px;" colspan="2">
+<p>&nbsp;![alt text](https://github.com/C0nstanta/Breakout_game/blob/master/img/2.png?raw=true)</p>
+</td>
 </tr>
 <tr>
 <td style="width: 469.344px;">
@@ -179,6 +189,11 @@
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>Выполнено&nbsp;</strong></span></td>
 </tr>
 <tr>
+<td style="width: 469.344px;" colspan="2">&nbsp;
+<pre>![alt text](https://github.com/C0nstanta/Breakout_game/blob/master/img/3.png?raw=true)<code></code></pre>
+</td>
+</tr>
+<tr>
 <td style="width: 469.344px;"><strong>&nbsp;</strong>
 <p class="p2"><strong>Если были сбиты все блоки, игра заканчивается победой (показывается соответсвующее сообщение с количеством набраных очков)</strong></p>
 <p class="p2"><strong>&nbsp;</strong></p>
@@ -222,6 +237,10 @@
 <p class="p2"><strong>&nbsp;</strong></p>
 </td>
 <td style="width: 10px;"><strong>&nbsp;&nbsp;Отсутствует</strong></td>
+</tr>
+<tr>
+<td style="width: 469.344px;">&nbsp;</td>
+<td style="width: 10px;">&nbsp;</td>
 </tr>
 </tbody>
 </table>
