@@ -1,4 +1,3 @@
-
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
 <h2><strong>$sudo apt install libx11-dev</strong></h2>
 <p>&nbsp;</p>
@@ -68,9 +67,7 @@
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>&nbsp;Выполнено</strong></span></td>
 </tr>
 <tr>
-<td style="width: 469.344px;" colspan="2">
-<img src="/img/1.png" alt="main"  />
-</td>
+<td style="width: 469.344px;" colspan="2"><img src="/img/1.png" alt="main" /></td>
 </tr>
 <tr>
 <td style="width: 469.344px;"><strong>&nbsp;</strong>
@@ -121,9 +118,7 @@
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>&nbsp;Выполнено</strong></span></td>
 </tr>
 <tr>
-<td style="width: 469.344px;" colspan="2">
-<img src="/img/2.png" alt="main"  />
-</td>
+<td style="width: 469.344px;" colspan="2"><img src="/img/2.png" alt="main" /></td>
 </tr>
 <tr>
 <td style="width: 469.344px;">
@@ -145,6 +140,9 @@
 <p class="p2"><strong>&nbsp;</strong></p>
 </td>
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>&nbsp;Выполнено</strong></span></td>
+</tr>
+<tr>
+<td style="width: 469.344px;" colspan="2"><img src="/img/4.png" alt="main" /></td>
 </tr>
 <tr>
 <td style="width: 469.344px;"><strong>&nbsp;</strong>
@@ -190,9 +188,7 @@
 <td style="width: 10px;"><span style="color: #ff0000;"><strong>Выполнено&nbsp;</strong></span></td>
 </tr>
 <tr>
-<td style="width: 469.344px;" colspan="2">&nbsp;
-<img src="/img/3.png" alt="main"  />
-</td>
+<td style="width: 469.344px;" colspan="2">&nbsp; <img src="/img/3.png" alt="main" /></td>
 </tr>
 <tr>
 <td style="width: 469.344px;"><strong>&nbsp;</strong>
