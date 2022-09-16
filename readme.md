@@ -68,7 +68,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<pre class="chroma" tabindex="0"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"/img/1.png"</span> <span class="na">alt</span><span class="o">=</span><span class="s">"Main menu"</span> <span class="na">title</span><span class="o">=</span><span class="s">"main menu"</span><span class="p">&gt;</span></code></pre>
+<pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback">![Main menu](/img/1.png?raw=true "main menu")</code></pre>
 </td>
 </tr>
 <tr>
