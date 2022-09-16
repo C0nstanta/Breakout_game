@@ -69,9 +69,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<pre class="chroma" tabindex="0"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"width:160px ; height:160px"</span><span class="p">&gt;</span>
-![Main Menu](/img/1.png?raw=true "Main Menu")
-<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+<pre class="chroma" tabindex="0">&lt;img src="/img/1.png" alt="main menu" width="360" height="150" /&gt;</pre>
 </td>
 </tr>
 <tr>
@@ -247,7 +245,3 @@
 </tr>
 </tbody>
 </table>
-
-<div style="width:160px ; height:160px">
-![Main Menu](./img/1.png?raw=true "Main Menu")
-<div>
