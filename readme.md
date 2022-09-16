@@ -1,3 +1,4 @@
+<p><strong><!-- #######  THIS IS A COMMENT - Visible only in the source editor #########--></strong></p>
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
 <h2><strong>$sudo apt install libx11-dev</strong></h2>
 <p>&nbsp;</p>
@@ -68,7 +69,9 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback">![Main menu](/img/1.png?raw=true "main menu")</code></pre>
+<pre class="chroma" tabindex="0"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"width:160px ; height:160px"</span><span class="p">&gt;</span>
+![Main Menu](/img/1.png?raw=true "Main Menu")
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
 </td>
 </tr>
 <tr>
