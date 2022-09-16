@@ -3,9 +3,6 @@
 //
 #include "../headers/ball.h"
 
-Ball::Ball() : ball_position_( {ball_pos_x, ball_pos_y} ),
-                ball_move_coord_( {0, 0} ),
-                ball_speed_(6) {}
 
 uint16_t Ball::get_ball_speed() const {
     return ball_speed_;

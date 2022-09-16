@@ -10,12 +10,12 @@
 using namespace GameConstants;
 
 class Ball {
-    XPoint ball_position_{};
-    XPoint ball_move_coord_{};
-    uint16_t ball_speed_{};
+    XPoint ball_position_{ball_pos_x, ball_pos_y};
+    XPoint ball_move_coord_{0, 0};
+    uint16_t ball_speed_{ball_speed};
 
 public:
-    Ball();
+    Ball() = default;
 
     [[nodiscard]] uint16_t get_ball_speed() const;
     [[nodiscard]] uint16_t get_ball_pos_x() const;

@@ -36,7 +36,7 @@ void Game::start() {
 
     float FPS = 30;
     uint64_t lastRepaint = 0;
-    std::vector<uint16_t> random_color;
+    std::vector<int16_t> random_color;
     uint16_t lives_num = 3;
 
     // load a larger font
@@ -161,37 +161,37 @@ void Game::block_wall_checker(Ball& ball_, Paddle& padd_) {
 
             ) {
 
-        ball_.set_ball_move_x(ball_.get_ball_move_x() + rand() % 5 + (-2) );
-        ball_.set_ball_move_y(-ball_.get_ball_move_y() + rand() % 5 + (-2) );
+        ball_.set_ball_move_x(ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+        ball_.set_ball_move_y(-ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
     }
 
     // left wall bounce
     if ( (ball_.get_ball_pos_x() >= 10 - ball_size/2) &&
          (ball_.get_ball_pos_x() <= 10 + ball_size) ) {
 
-        ball_.set_ball_move_x(-ball_.get_ball_move_x() + rand() % 5 + (-2) );
-        ball_.set_ball_move_y(ball_.get_ball_move_y() + rand() % 5 + (-2) );
+        ball_.set_ball_move_x(-ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+        ball_.set_ball_move_y(ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
     }
 
     //right wall bounce
     if ( (ball_.get_ball_pos_x()  <= win_width - 10 + ball_size/2) &&
          (ball_.get_ball_pos_x()  >= win_width - 10 - ball_size) )  {
 
-        ball_.set_ball_move_x(-ball_.get_ball_move_x() + rand() % 5 + (-2) );
-        ball_.set_ball_move_y(ball_.get_ball_move_y() + rand() % 5 + (-2) );
+        ball_.set_ball_move_x(-ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+        ball_.set_ball_move_y(ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
     }
 
     //ceiling bounce
     if ( (ball_.get_ball_pos_y() >= 130 - ball_size) &&
          (ball_.get_ball_pos_y() <= 130 + ball_size) )  {
 
-        ball_.set_ball_move_x(ball_.get_ball_move_x() + rand() % 5 + (-2) );
-        ball_.set_ball_move_y(-ball_.get_ball_move_y() + rand() % 5 + (-2) );
+        ball_.set_ball_move_x(ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+        ball_.set_ball_move_y(-ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
     }
 }
 
-void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangle*> blocks_, uint16_t& score_,
-                          std::vector<uint16_t>& random_color) {
+void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangle*>& blocks_, uint16_t& score_,
+                          std::vector<int16_t>& random_color) {
     int erase = false;
     for (size_t i = 0; i < blocks_.size(); ++i) {
         //bottom block side
@@ -202,8 +202,8 @@ void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangl
              )
                 ) {
 
-            ball_.set_ball_move_x(ball_.get_ball_move_x() + rand() % 5 + (-2) );
-            ball_.set_ball_move_y(-ball_.get_ball_move_y() + rand() % 5 + (-2) );
+            ball_.set_ball_move_x(ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+            ball_.set_ball_move_y(-ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
             erase = true;
         }
             // ceiling block side
@@ -214,8 +214,33 @@ void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangl
                   )
                 ) {
 
-            ball_.set_ball_move_x(ball_.get_ball_move_x() + rand() % 5 + (-2) );
-            ball_.set_ball_move_y(-ball_.get_ball_move_y() + rand() % 5 + (-2) );
+            ball_.set_ball_move_x(ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+            ball_.set_ball_move_y(-ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
+            erase = true;
+        }
+        // left block wall
+        else if ( (ball_.get_ball_pos_x() + ball_size <= blocks_[i]->get_x()) &&
+                (ball_.get_ball_pos_x() - ball_size >= blocks_[i]->get_x())
+                &&
+                ( (ball_.get_ball_pos_y() <= blocks_[i]->get_y() + 25 + ball_size) &&
+                        (ball_.get_ball_pos_y() >= blocks_[i]->get_y() - ball_size)
+                        )
+                )
+        {
+            ball_.set_ball_move_x(-ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+            ball_.set_ball_move_y(ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
+            erase = true;
+
+        }
+        // right block wall
+        else if ( ( (ball_.get_ball_pos_x() >= blocks_[i]->get_x() + 80 + ball_size / 2 - 1) && // - ball_size/2
+                    (ball_.get_ball_pos_x() <= blocks_[i]->get_x() + 80 + ball_size + 3) ) &&
+                ((ball_.get_ball_pos_y() <= blocks_[i]->get_y() + 25) &&
+                        (ball_.get_ball_pos_y() >= blocks_[i]->get_y()))
+                ) {
+
+            ball_.set_ball_move_x(-ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
+            ball_.set_ball_move_y(ball_.get_ball_move_y() /* + rand() % 5 + (-2) */);
             erase = true;
         }
 

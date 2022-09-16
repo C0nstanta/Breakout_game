@@ -14,7 +14,7 @@ Rectangle::Rectangle(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
 
 
 
-std::vector<uint16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, std::vector<Rectangle*>& blocks, uint16_t num_rows,
+std::vector<int16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, std::vector<Rectangle*>& blocks, uint16_t num_rows,
                                                 uint16_t block_width, uint16_t block_height) {
     if ( !blocks.empty() ) { return {}; }
 
@@ -23,7 +23,7 @@ std::vector<uint16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, st
         exit(1);
     }
 
-    std::vector<uint16_t> random_color;
+    std::vector<int16_t> random_color;
     auto tup_color =  std::make_tuple(drawer.red_, drawer.blue_, drawer.green_);
     for (size_t row=0; row < num_rows; ++row) {
         for(size_t row_width=150; row_width < (win_width - 150); row_width += block_width) {
@@ -39,7 +39,7 @@ std::vector<uint16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, st
 }
 
 void Rectangle::paint_block(XInfo& xinfo, Drawer& drawer, std::vector<Rectangle*>& blocks,
-                            std::vector<uint16_t>& rand_color) {
+                            std::vector<int16_t>& rand_color) {
     size_t n = blocks.size();
     auto tup_color =  std::make_tuple(drawer.red_, drawer.blue_, drawer.green_);
 

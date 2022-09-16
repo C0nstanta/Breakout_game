@@ -22,10 +22,10 @@ public:
     virtual void paint(XInfo&) override;
     virtual void fill(XInfo& );
 
-    static std::vector<uint16_t> blocks_creator(XInfo&, Drawer&, std::vector<Rectangle*>&,
+    static std::vector<int16_t> blocks_creator(XInfo&, Drawer&, std::vector<Rectangle*>&,
                                          uint16_t, uint16_t, uint16_t);
 
-    static void paint_block(XInfo&, Drawer&, std::vector<Rectangle*>&, std::vector<uint16_t>&);
+    static void paint_block(XInfo&, Drawer&, std::vector<Rectangle*>&, std::vector<int16_t>&);
 
     uint16_t get_score() const {
         return block_score_;

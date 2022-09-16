@@ -45,8 +45,8 @@ public:
     void start();
 
     static void block_wall_checker(Ball&, Paddle&);
-    static void block_bounce_checker(XInfo&, Ball&, std::vector<Rectangle*>, uint16_t&,
-                              std::vector<uint16_t>&);
+    static void block_bounce_checker(XInfo&, Ball&, std::vector<Rectangle*>&, uint16_t&,
+                              std::vector<int16_t>&);
     static void repainter(XInfo&_, Drawer&, Ball&, Paddle&);
     void process_catcher (XInfo&, Paddle&, Ball&, uint16_t&);
 };
