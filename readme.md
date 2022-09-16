@@ -1,4 +1,4 @@
-<p><strong><!-- #######  THIS IS A COMMENT - Visible only in the source editor #########--></strong></p>
+
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
 <h2><strong>$sudo apt install libx11-dev</strong></h2>
 <p>&nbsp;</p>
@@ -69,7 +69,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<img src="/img/2.png" alt="main"  />
+<img src="/img/1.png" alt="main"  />
 </td>
 </tr>
 <tr>
@@ -122,7 +122,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">
-<p>&nbsp;![alt text](https://github.com/C0nstanta/Breakout_game/blob/master/img/2.png?raw=true)</p>
+<img src="/img/2.png" alt="main"  />
 </td>
 </tr>
 <tr>
@@ -191,7 +191,7 @@
 </tr>
 <tr>
 <td style="width: 469.344px;" colspan="2">&nbsp;
-<pre>![alt text](https://github.com/C0nstanta/Breakout_game/blob/master/img/3.png?raw=true)<code></code></pre>
+<img src="/img/3.png" alt="main"  />
 </td>
 </tr>
 <tr>
