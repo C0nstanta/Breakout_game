@@ -1,3 +1,5 @@
+<h1><strong>The repository contains an ELF file due to the fact that on some Nix systems Xlib behaves incorrectly and text inscriptions (menus) disappear</strong></h1>
+<p>&nbsp;</p>
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
 <h2><strong>$sudo apt install libx11-dev</strong></h2>
 <p>&nbsp;</p>
