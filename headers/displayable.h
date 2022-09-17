@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 // Include Graph libs
 #include <X11/Xlib.h>

@@ -5,9 +5,6 @@
 
 Paddle::Paddle() = default;
 
-
-//    virtual void paint(XInfo&) override;
-
 uint16_t Paddle::get_pad_x() const {
     return padding_pos_x_;
 }

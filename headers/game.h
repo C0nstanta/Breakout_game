@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <vector>
 #include <string>
+#include <memory>
 
 #include "ball.h"
 #include "texts.h"
@@ -23,13 +24,14 @@ class Game {
     XInfo xinfo_{};
     XEvent event{};
 
-    std::vector<Displayable*> greeting_vec_{};
-    std::vector<Displayable*> help_vec_{};
-    std::vector<Displayable*> restart_vec_{};
-    std::vector<Rectangle*> blocks_;
-    Rectangle* rectangle_{};
+    std::vector<std::shared_ptr<Displayable*>> greeting_vec_{};
+    std::vector<std::shared_ptr<Displayable*>> help_vec_{};
+    std::vector<std::shared_ptr<Displayable*>> restart_vec_{};
+    std::vector<std::shared_ptr<Rectangle*>> blocks_;
+    std::shared_ptr<Rectangle*> rectangle_{};
     uint16_t score_{};
-    Loader loader{};
+    uint16_t total_score_{};
+//    Loader loader{};
 
     bool start_game_{false};
     bool stop_game_{false};
@@ -45,8 +47,8 @@ public:
     void start();
 
     static void block_wall_checker(Ball&, Paddle&);
-    static void block_bounce_checker(XInfo&, Ball&, std::vector<Rectangle*>&, uint16_t&,
-                              std::vector<int16_t>&);
+    static void block_bounce_checker(XInfo&, Ball&, std::vector<std::shared_ptr<Rectangle*>>&,
+                                     uint16_t&, std::vector<int16_t>&);
     static void repainter(XInfo&_, Drawer&, Ball&, Paddle&);
     void process_catcher (XInfo&, Paddle&, Ball&, uint16_t&);
 };

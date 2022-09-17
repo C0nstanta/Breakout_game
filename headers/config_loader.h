@@ -8,7 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <tuple>
-#include <map>
+#include <memory>
 
 #include "texts.h"
 #include "rectangle.h"
@@ -17,9 +17,8 @@ using std::vector;
 
 class Loader {
 public:
-    static void parse_config(const std::string&, std::map<std::string, uint16_t>& );
-    static void parse_text(vector<Displayable*>& , const std::string& );
-    static void text_loader(vector<Displayable*>& , const std::string& );
+    static void parse_text(vector<std::shared_ptr<Displayable*>>& , const std::string& );
+    static void text_loader(vector<std::shared_ptr<Displayable*>>& , const std::string& );
 };
 
 

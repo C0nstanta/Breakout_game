@@ -1,7 +1,3 @@
-//
-// Created by parallels on 9/12/22.
-//
-
 #include "../headers/rectangle.h"
 
 Rectangle::Rectangle(uint16_t  block_score) : block_score_(block_score) {};
@@ -12,9 +8,8 @@ Rectangle::Rectangle(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
                                                height_(height)
 {}
 
-
-
-std::vector<int16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, std::vector<Rectangle*>& blocks, uint16_t num_rows,
+std::vector<int16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer,
+                                               std::vector<std::shared_ptr<Rectangle*>>& blocks, uint16_t num_rows,
                                                 uint16_t block_width, uint16_t block_height) {
     if ( !blocks.empty() ) { return {}; }
 
@@ -28,7 +23,8 @@ std::vector<int16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, std
     for (size_t row=0; row < num_rows; ++row) {
         for(size_t row_width=150; row_width < (win_width - 150); row_width += block_width) {
             uint16_t row_height = ((row * (block_height + 10)) * 2 + 200);
-            blocks.push_back(new Rectangle(row_width, row_height, block_width, block_height));
+            blocks.push_back(std::make_shared<Rectangle*>(new Rectangle(row_width, row_height, block_width,
+                                                                        block_height)));
 
 
             int rand_idx = (rand() % std::tuple_size<decltype(tup_color)>::value);
@@ -38,7 +34,7 @@ std::vector<int16_t> Rectangle::blocks_creator(XInfo& xinfo, Drawer& drawer, std
     return random_color;
 }
 
-void Rectangle::paint_block(XInfo& xinfo, Drawer& drawer, std::vector<Rectangle*>& blocks,
+void Rectangle::paint_block(XInfo& xinfo, Drawer& drawer, std::vector<std::shared_ptr<Rectangle*>>& blocks,
                             std::vector<int16_t>& rand_color) {
     size_t n = blocks.size();
     auto tup_color =  std::make_tuple(drawer.red_, drawer.blue_, drawer.green_);
@@ -47,19 +43,19 @@ void Rectangle::paint_block(XInfo& xinfo, Drawer& drawer, std::vector<Rectangle*
         int rand_idx = rand_color[i];
         switch (rand_idx) {
             case 0:
-                blocks[i]->block_score_ = 1;
+                (*blocks[i])->block_score_ = 1;
                 XSetForeground(xinfo.display, xinfo.gc, std::get<0>(tup_color).pixel);
                 break;
             case 1:
-                blocks[i]->block_score_ = 2;
+                (*blocks[i])->block_score_ = 2;
                 XSetForeground(xinfo.display, xinfo.gc, std::get<1>(tup_color).pixel);
                 break;
             default:
-                blocks[i]->block_score_ = 3;
+                (*blocks[i])->block_score_ = 3;
                 XSetForeground(xinfo.display, xinfo.gc, std::get<2>(tup_color).pixel);
                 break;
         }
-        blocks[i]->fill(xinfo);
+        (*blocks[i])->fill(xinfo);
     }
 }
 

@@ -12,9 +12,9 @@ uint64_t now() {
 }
 
 void Game::init_texts() {
-    loader.text_loader(greeting_vec_, "greeting.txt");
-    loader.text_loader(help_vec_, "help.txt");
-    loader.text_loader(restart_vec_, "restart.txt");
+    Loader::text_loader(greeting_vec_, "greeting.txt");
+    Loader::text_loader(help_vec_, "help.txt");
+    Loader::text_loader(restart_vec_, "restart.txt");
 
 }
 
@@ -44,6 +44,8 @@ void Game::start() {
     font = XLoadQueryFont (xinfo_.display, "8x16");
     XSetFont (xinfo_.display, xinfo_.gc, font->fid);
 
+    // clear background
+    xinfo_.pixmap = xinfo_.window;
     while (true) {
 
         // process if we have any events
@@ -51,8 +53,7 @@ void Game::start() {
 
         uint64_t end = now();
         if (end - lastRepaint > 1000000 / FPS) {
-            // clear background
-            xinfo_.pixmap = xinfo_.window;
+
             XClearWindow(xinfo_.display, xinfo_.pixmap);
             if (start_game_ == True) {
 
@@ -61,16 +62,21 @@ void Game::start() {
                     help_vec_.pop_back();
                 }
 
-                help_vec_.push_back(new Text(800, 30, "Score: " + std::to_string(score_)));
-                help_vec_.push_back(new Text(800, 50, "Lives left: " + std::to_string(lives_num)));
+                help_vec_.push_back(std::make_shared<Displayable*>(new Text(800, 30, "Score: " +
+                                    std::to_string(score_))));
+                help_vec_.push_back(std::make_shared<Displayable*>(new Text(800, 50, "Lives left: " +
+                                    std::to_string(lives_num))));
                 drawer.x_draw(help_vec_);
 
-                if (blocks_.empty()) {
-                    random_color = rectangle_->blocks_creator(xinfo_, drawer, blocks_,
+                if (blocks_.empty() && shoot_the_ball_ && start_game_) {
+                    quit_flag = true;
+                }
+                else if (blocks_.empty()) {
+                    random_color = Rectangle::blocks_creator(xinfo_, drawer, blocks_,
                                                               3, 80, 25);
                 }
 
-                rectangle_->paint_block(xinfo_, drawer, blocks_, random_color);
+                Rectangle::paint_block(xinfo_, drawer, blocks_, random_color);
                 XSetForeground(xinfo_.display, xinfo_.gc,
                                BlackPixel(xinfo_.display, drawer.get_screen()));
 
@@ -95,6 +101,7 @@ void Game::start() {
                     start_game_ = False;
                     stop_game_ = True;
                     --lives_num;
+                    total_score_ += score_;
                 }
 
                 // bounce ball
@@ -116,13 +123,18 @@ void Game::start() {
                 else {
                     if (lives_num < 1) {
                         restart_vec_.clear();
-                        restart_vec_.push_back(new Text(550, 350, "Zero Lives left"));
-                        restart_vec_.push_back(new Text(550, 380, "Press Q - to quit"));
-                        restart_vec_.push_back(new Text(550, 410, "Press R - to main menu"));
+                        restart_vec_.push_back(std::make_shared<Displayable*>(new Text(550, 350, "Zero Lives left")));
+                        restart_vec_.push_back(std::make_shared<Displayable*>(new Text(550, 380, "Press Q - to quit")));
+                        restart_vec_.push_back(std::make_shared<Displayable*>(new Text(550, 410, "Press R - to main "
+                                                                                                 "menu")));
                     }
                     else {
                         restart_vec_.pop_back();
-                        restart_vec_.push_back(new Text(550, 350, "Lives left: " + std::to_string(lives_num)));
+                        restart_vec_.pop_back();
+                        restart_vec_.push_back(std::make_shared<Displayable*>(new Text(550, 350, "Lives left: " +
+                                                std::to_string(lives_num))));
+                        restart_vec_.push_back(std::make_shared<Displayable*>(new Text(550, 380, "Total score: " +
+                                                std::to_string(total_score_))));
                     }
                     drawer.x_draw(restart_vec_);
                     XFlush(xinfo_.display);
@@ -190,15 +202,15 @@ void Game::block_wall_checker(Ball& ball_, Paddle& padd_) {
     }
 }
 
-void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangle*>& blocks_, uint16_t& score_,
-                          std::vector<int16_t>& random_color) {
+void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<std::shared_ptr<Rectangle*>>& blocks_,
+                                uint16_t& score_, std::vector<int16_t>& random_color) {
     int erase = false;
     for (size_t i = 0; i < blocks_.size(); ++i) {
         //bottom block side
-        if ( (ball_.get_ball_pos_x()  >= blocks_[i]->get_x() - ball_size/2 &&
-              ( ball_.get_ball_pos_x() <= blocks_[i]->get_x() + 80 + ball_size/2)
-             ) && ( (blocks_[i]->get_y() + 25 - ball_size/2 <= ball_.get_ball_pos_y()) &&
-                    (blocks_[i]->get_y() + 25 + ball_size/2 >= ball_.get_ball_pos_y())
+        if ( (ball_.get_ball_pos_x()  >= (*blocks_[i])->get_x() - ball_size/2 &&
+              ( ball_.get_ball_pos_x() <= (*blocks_[i])->get_x() + 80 + ball_size/2)
+             ) && ( ((*blocks_[i])->get_y() + 25 - ball_size/2 <= ball_.get_ball_pos_y()) &&
+                    ((*blocks_[i])->get_y() + 25 + ball_size/2 >= ball_.get_ball_pos_y())
              )
                 ) {
 
@@ -207,10 +219,10 @@ void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangl
             erase = true;
         }
             // ceiling block side
-        else if ( (ball_.get_ball_pos_x()  >= blocks_[i]->get_x() - ball_size &&
-                   ( ball_.get_ball_pos_x() <= blocks_[i]->get_x() + 80 + ball_size)
-                  ) && ( (ball_.get_ball_pos_y() <= blocks_[i]->get_y() + ball_size) &&
-                         (ball_.get_ball_pos_y() >= blocks_[i]->get_y() - ball_size)
+        else if ( (ball_.get_ball_pos_x()  >= (*blocks_[i])->get_x() - ball_size &&
+                   ( ball_.get_ball_pos_x() <= (*blocks_[i])->get_x() + 80 + ball_size)
+                  ) && ( (ball_.get_ball_pos_y() <= (*blocks_[i])->get_y() + ball_size) &&
+                         (ball_.get_ball_pos_y() >= (*blocks_[i])->get_y() - ball_size)
                   )
                 ) {
 
@@ -219,11 +231,11 @@ void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangl
             erase = true;
         }
         // left block wall
-        else if ( (ball_.get_ball_pos_x() + ball_size <= blocks_[i]->get_x()) &&
-                (ball_.get_ball_pos_x() - ball_size >= blocks_[i]->get_x())
+        else if ( (ball_.get_ball_pos_x() + ball_size <= (*blocks_[i])->get_x()) &&
+                (ball_.get_ball_pos_x() - ball_size >= (*blocks_[i])->get_x())
                 &&
-                ( (ball_.get_ball_pos_y() <= blocks_[i]->get_y() + 25 + ball_size) &&
-                        (ball_.get_ball_pos_y() >= blocks_[i]->get_y() - ball_size)
+                ( (ball_.get_ball_pos_y() <= (*blocks_[i])->get_y() + 25 + ball_size) &&
+                        (ball_.get_ball_pos_y() >= (*blocks_[i])->get_y() - ball_size)
                         )
                 )
         {
@@ -233,10 +245,10 @@ void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangl
 
         }
         // right block wall
-        else if ( ( (ball_.get_ball_pos_x() >= blocks_[i]->get_x() + 80 + ball_size / 2 - 1) && // - ball_size/2
-                    (ball_.get_ball_pos_x() <= blocks_[i]->get_x() + 80 + ball_size + 3) ) &&
-                ((ball_.get_ball_pos_y() <= blocks_[i]->get_y() + 25) &&
-                        (ball_.get_ball_pos_y() >= blocks_[i]->get_y()))
+        else if ( ( (ball_.get_ball_pos_x() >= (*blocks_[i])->get_x() + 80 + ball_size / 2 - 1) && // - ball_size/2
+                    (ball_.get_ball_pos_x() <= (*blocks_[i])->get_x() + 80 + ball_size + 3) ) &&
+                ((ball_.get_ball_pos_y() <= (*blocks_[i])->get_y() + 25) &&
+                        (ball_.get_ball_pos_y() >= (*blocks_[i])->get_y()))
                 ) {
 
             ball_.set_ball_move_x(-ball_.get_ball_move_x() /* + rand() % 5 + (-2) */);
@@ -245,15 +257,15 @@ void Game::block_bounce_checker(XInfo& xinfo_, Ball& ball_, std::vector<Rectangl
         }
 
         if(erase == true) {
-            score_ += blocks_[i]->get_score();
-            if (blocks_[i]->get_score() == 1) {
+            score_ += (*blocks_[i])->get_score();
+            if ((*blocks_[i])->get_score() == 1) {
                 blocks_.erase(blocks_.begin() + i);
                 random_color.erase(random_color.begin() + i);
                 --i;
             }
             else {
-                blocks_[i]->set_score(blocks_[i]->get_score() - 1);
-                random_color[i] = (blocks_[i]->get_score() - 1);
+                (*blocks_[i])->set_score((*blocks_[i])->get_score() - 1);
+                random_color[i] = ((*blocks_[i])->get_score() - 1);
             }
 
             XFlush(xinfo_.display);
@@ -354,6 +366,7 @@ void Game::process_catcher (XInfo& xInfo, Paddle& padd_, Ball& ball_, uint16_t& 
                     start_game_ = true;
                     restart_flag = true;
                     lives_num = 3;
+                    total_score_ = 0;
                     score_ = 0;
                 }
 

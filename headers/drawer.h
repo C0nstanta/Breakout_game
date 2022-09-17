@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <map>
+#include <memory>
 
 #include "displayable.h"
 #include "texts.h"
@@ -15,11 +15,10 @@
 using namespace GameConstants;
 
 class Drawer {
-    XInfo* p_xinfo_;
+    std::shared_ptr<XInfo*> p_xinfo_;
     Colormap cmap_{};
     XWindowAttributes w_attr_{};
     uint16_t screen_{0};
-
 
 public:
     explicit Drawer(XInfo&);
@@ -28,7 +27,7 @@ public:
 
     void initX();
     void display_window();
-    void x_draw(std::vector<Displayable*>&);
+    void x_draw(std::vector<std::shared_ptr<Displayable*>>&);
     void create_gc();
     void color_map();
     [[nodiscard]] uint16_t get_screen() const;

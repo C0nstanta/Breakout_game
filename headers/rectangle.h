@@ -5,6 +5,8 @@
 #include <vector>
 #include <tuple>
 #include <functional>
+#include <memory>
+
 #include "displayable.h"
 #include "drawer.h"
 #include "../config/game_settings.h"
@@ -22,12 +24,14 @@ public:
     virtual void paint(XInfo&) override;
     virtual void fill(XInfo& );
 
-    static std::vector<int16_t> blocks_creator(XInfo&, Drawer&, std::vector<Rectangle*>&,
-                                         uint16_t, uint16_t, uint16_t);
+    static std::vector<int16_t> blocks_creator(XInfo&, Drawer&,
+                                               std::vector<std::shared_ptr<Rectangle*>>&,
+                                               uint16_t, uint16_t, uint16_t);
 
-    static void paint_block(XInfo&, Drawer&, std::vector<Rectangle*>&, std::vector<int16_t>&);
+    static void paint_block(XInfo&, Drawer&, std::vector<std::shared_ptr<Rectangle*>>&,
+            std::vector<int16_t>&);
 
-    uint16_t get_score() const {
+    [[nodiscard]] uint16_t get_score() const {
         return block_score_;
     }
 
@@ -35,20 +39,11 @@ public:
         block_score_ = val;
     }
 
-    size_t get_width() const;
-    size_t get_height() const;
+    [[nodiscard]] size_t get_width() const;
+    [[nodiscard]] size_t get_height() const;
 
-    int get_x() const;
-    int get_y() const;
-
-    void set_x(int x) {
-        x_ = x;
-    }
-
-    void set_y(int y) {
-        y_ = y;
-    }
-
+    [[nodiscard]] int get_x() const;
+    [[nodiscard]] int get_y() const;
 
 private:
     int x_{0};
