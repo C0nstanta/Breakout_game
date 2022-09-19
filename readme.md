@@ -3,6 +3,11 @@
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
 <h2><strong>$sudo apt install libx11-dev</strong></h2>
 <p>&nbsp;</p>
+<h2><strong>UPD: Многочисленные тесты показали, что сбборка на clang намного стабильнее</strong></h2>
+<h2><strong>В следующей обнове будет в CMakeLists.txt использован Clang</strong></h2>
+<p>&nbsp;</p>
+
+
 <h2 id="tw-target-text" class="tw-data-text tw-text-large tw-ta" dir="ltr" data-placeholder="Translation"><strong><span class="Y2IQFc" lang="en">TODO:</span></strong></h2>
 <table style="height: 374px; width: 819px;">
 <tbody>
