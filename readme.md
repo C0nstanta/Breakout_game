@@ -3,7 +3,7 @@
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
 <h2><strong>$sudo apt install libx11-dev</strong></h2>
 <p>&nbsp;</p>
-<h2><strong>UPD: Многочисленные тесты показали, что сбборка на clang намного стабильнее</strong></h2>
+<h2><strong>UPD: Многочисленные тесты показали, что сборка на clang намного стабильнее</strong></h2>
 <h2><strong>В следующей обнове будет в CMakeLists.txt использован Clang</strong></h2>
 <p>&nbsp;</p>
 
