@@ -5,19 +5,30 @@
 #include <iostream>
 #include <sys/time.h>
 #include <unistd.h>
+#include <utility>
 #include <vector>
 #include <string>
 #include <memory>
 
-#include "ball.h"
+//#include <thread>
+
+
+
+
+//#include "ball.h"
 #include "texts.h"
 #include "rectangle.h"
 #include "paddle.h"
 #include "displayable.h"
 #include "../config/game_settings.h"
 #include "config_loader.h"
+#include "test_helper.h"
 
-class Ball;
+#include <mutex>
+#include <atomic>
+#include <condition_variable>
+
+
 class Paddle;
 
 class Game {
@@ -31,7 +42,6 @@ class Game {
     std::shared_ptr<Rectangle*> rectangle_{};
     uint16_t score_{};
     uint16_t total_score_{};
-//    Loader loader{};
 
     bool start_game_{false};
     bool stop_game_{false};
@@ -51,6 +61,52 @@ public:
                                      uint16_t&, std::vector<int16_t>&);
     static void repainter(XInfo&_, Drawer&, Ball&, Paddle&);
     void process_catcher (XInfo&, Paddle&, Ball&, uint16_t&);
+
+    /*For Test helper additional methods*/
+    XInfo* get_xInfo() {
+        return &xinfo_;
+    }
+
+    Ball* get_ball() {
+        return &ball_;
+    }
+
+    Paddle* get_paddle() {
+        return  &padd_;
+    }
+
+    XEvent* get_event() {
+        return &event;
+    }
+
+
+    void some_process(TestHelper& t_help, std::string letter) {
+
+        std::unique_lock<std::mutex> lock(mtx_);
+        in_out.wait(lock, [&] () {
+            return !flag.load();
+        });
+
+        std::chrono::milliseconds(1500);
+        t_help.ClickKey(xinfo_, std::move(letter));
+        flag.store(false);
+        in_out.notify_one();
+    }
+
+    void set_test_mode(bool tst=false) {
+        is_test = tst;
+    }
+
+    /*This private block need to use test part*/
+private:
+    std::mutex mtx_;
+    std::atomic<bool> flag{false};
+    std::condition_variable in_out;
+
+    Ball ball_{}; // need for tester
+    Paddle padd_{};
+    bool is_test{false};
+
 };
 
 

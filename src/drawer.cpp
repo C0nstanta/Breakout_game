@@ -3,9 +3,6 @@
 //
 #include "../headers/drawer.h"
 
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-
 
 Drawer::Drawer(XInfo& xinf) : p_xinfo_{std::make_shared<XInfo*>(&xinf)} {}
 

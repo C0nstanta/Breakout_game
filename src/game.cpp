@@ -31,8 +31,8 @@ void Game::start() {
     init_texts();
     init_drawer(drawer);
 
-    Ball ball_;
-    Paddle padd_;
+//    Ball ball_;
+//    Paddle padd_;
 
     float FPS = 30;
     uint64_t lastRepaint = 0;
@@ -156,6 +156,17 @@ void Game::start() {
         // IMPORTANT: sleep for a bit to let other processes work
         if (XPending(xinfo_.display) == 0) {
             usleep(1000000 / FPS - (now() - lastRepaint));
+        }
+
+
+        set_test_mode();
+        if (is_test) {
+            /*____________pass the action to tester______________*/
+            std::unique_lock<std::mutex> lock(mtx_);
+            in_out.wait(lock, [&]() { return !flag.load(); } );
+            flag.store(true);
+            in_out.notify_one();
+            /*-------------end--------------------*/
         }
 
         if (quit_flag) { break; }

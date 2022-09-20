@@ -1,0 +1,1 @@
+SET(config game_settings.h)

@@ -4,8 +4,7 @@
 
 #include "displayable.h"
 #include "../config/game_settings.h"
-#include "paddle.h"
-#include "game.h"
+
 
 using namespace GameConstants;
 

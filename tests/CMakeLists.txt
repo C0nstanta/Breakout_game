@@ -1,0 +1,1 @@
+set(gtest_lib google_tests.cpp)

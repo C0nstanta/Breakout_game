@@ -1,0 +1,1 @@
+SET(headers ball.h config_loader.h displayable.h drawer.h game.h paddle.h rectangle.h texts.h)
