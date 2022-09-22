@@ -150,6 +150,7 @@ void Game::start() {
 
             XFlush(xinfo_.display);
             lastRepaint = now(); // remember when the paint happened
+
         }
 
         lastRepaint = now();
@@ -159,15 +160,7 @@ void Game::start() {
         }
 
 
-        set_test_mode();
-        if (is_test) {
-            /*____________pass the action to tester______________*/
-            std::unique_lock<std::mutex> lock(mtx_);
-            in_out.wait(lock, [&]() { return !flag.load(); } );
-            flag.store(true);
-            in_out.notify_one();
-            /*-------------end--------------------*/
-        }
+
 
         if (quit_flag) { break; }
     }
@@ -424,3 +417,34 @@ void Game::process_catcher (XInfo& xInfo, Paddle& padd_, Ball& ball_, uint16_t& 
         }
     }
 }
+
+/*Test block*/
+void Game::some_process(TestHelper& t_help, std::string letter, bool quit) {
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    t_help.ClickKey(xinfo_, std::move(letter), quit);
+
+    std::cerr << "padd_x: " << padd_.get_pad_x() << ", padd_y: " << padd_.get_pad_y() << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+}
+
+void Game::set_test_mode(bool tst=false) {
+    is_test = tst;
+}
+
+XInfo* Game::get_xInfo() {
+    return &xinfo_;
+}
+
+Ball* Game::get_ball() {
+    return &ball_;
+}
+
+Paddle* Game::get_paddle() {
+    return  &padd_;
+}
+
+XEvent* Game::get_event() {
+    return &event;
+}
+

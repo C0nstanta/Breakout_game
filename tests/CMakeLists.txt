@@ -1,1 +1,1 @@
-set(gtest_lib google_tests.cpp)
+set(gtest_lib google_greeting_tests.cpp)

@@ -14,7 +14,7 @@ namespace GameConstants {
     const uint16_t padding_width = 100;
     const uint16_t padding_height = 10;
     constexpr uint16_t padding_pos_x = win_width/2 - padding_width/2;
-    constexpr uint16_t padding_pos_y = win_height - 50;
+    constexpr uint16_t padding_pos_y = win_height - 70;
     const uint16_t ball_size = 10;
     const uint16_t ball_speed = 4;
     constexpr uint16_t ball_pos_x = padding_pos_x + padding_width/2;

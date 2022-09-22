@@ -10,12 +10,6 @@
 #include <string>
 #include <memory>
 
-//#include <thread>
-
-
-
-
-//#include "ball.h"
 #include "texts.h"
 #include "rectangle.h"
 #include "paddle.h"
@@ -30,6 +24,7 @@
 
 
 class Paddle;
+class TestHelper;
 
 class Game {
     XInfo xinfo_{};
@@ -63,39 +58,13 @@ public:
     void process_catcher (XInfo&, Paddle&, Ball&, uint16_t&);
 
     /*For Test helper additional methods*/
-    XInfo* get_xInfo() {
-        return &xinfo_;
-    }
+    XInfo* get_xInfo();
+    Ball* get_ball();
+    Paddle* get_paddle();
+    XEvent* get_event();
 
-    Ball* get_ball() {
-        return &ball_;
-    }
-
-    Paddle* get_paddle() {
-        return  &padd_;
-    }
-
-    XEvent* get_event() {
-        return &event;
-    }
-
-
-    void some_process(TestHelper& t_help, std::string letter) {
-
-        std::unique_lock<std::mutex> lock(mtx_);
-        in_out.wait(lock, [&] () {
-            return !flag.load();
-        });
-
-        std::chrono::milliseconds(1500);
-        t_help.ClickKey(xinfo_, std::move(letter));
-        flag.store(false);
-        in_out.notify_one();
-    }
-
-    void set_test_mode(bool tst=false) {
-        is_test = tst;
-    }
+    void some_process(TestHelper&, std::string, bool=false);
+    void set_test_mode(bool);
 
     /*This private block need to use test part*/
 private:
@@ -106,7 +75,6 @@ private:
     Ball ball_{}; // need for tester
     Paddle padd_{};
     bool is_test{false};
-
 };
 
 

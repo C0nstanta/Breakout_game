@@ -43,6 +43,6 @@ target_link_libraries(BreakOut src_lib pthread)
 
 
 #Tests
-add_executable(test_runner ./tests/google_tests.cpp headers/test_helper.h tests/keyboard_simulator.cpp)
+add_executable(test_runner tests/google_greeting_tests.cpp headers/test_helper.h tests/keyboard_simulator.cpp src/test_helper.cpp)
 target_link_libraries(test_runner  src_lib ${GTEST_LIBRARIES} pthread gtest gtest_main)
 target_include_directories(test_runner PRIVATE ${CMAKE_INCLUDE_CURRENT_DIR}/src)
