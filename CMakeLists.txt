@@ -37,7 +37,7 @@ add_subdirectory(src)
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lX11 -lXtst")
 
 #Game
-add_executable(BreakOut main.cpp ${headers} ${config} headers/test_helper.h)
+add_executable(BreakOut main.cpp ${headers} ${config} headers/test_helper.h src/test_helper.cpp)
 target_link_libraries(BreakOut src_lib pthread)
 
 

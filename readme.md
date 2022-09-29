@@ -1,3 +1,15 @@
+<table style="width: 392.438px;">
+<tbody>
+<tr>
+<td style="width: 816.438px;">
+<h2>Class Diagram (Class Model)</h2>
+</td>
+</tr>
+<tr>
+<td style="width: 518px;"> <img src="/UML/ClassDiargam_ClassModel.png" alt="main" /></td>
+</tr>
+</tbody>
+</table>
 <h1><strong>The repository contains an ELF file due to the fact that on some Nix systems Xlib behaves incorrectly and text inscriptions (menus) disappear</strong></h1>
 <p>&nbsp;</p>
 <h2><strong>Run under Ubuntu. Be sure to install the library Xlib.h</strong></h2>
@@ -10,11 +22,8 @@
 <h3>через связку [std::unique_lock, std::atomic, std::conditional_variable, std::mutex]</h3>
 <h3>На данный момент идет написание тестов на проверку всех действий клавиатуры и</h3>
 <h3>всего - что связано с непосредственно игровым процессом</h3>
-
-<h2><strong></strong></h2>
+<h2>&nbsp;</h2>
 <p>&nbsp;</p>
-
-
 <h2 id="tw-target-text" class="tw-data-text tw-text-large tw-ta" dir="ltr" data-placeholder="Translation"><strong><span class="Y2IQFc" lang="en">TODO:</span></strong></h2>
 <table style="height: 374px; width: 819px;">
 <tbody>
